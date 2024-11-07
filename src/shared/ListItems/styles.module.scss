@@ -1,0 +1,14 @@
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  box-sizing: border-box;
+  gap: 20px;
+}
+
+.task {
+  text-align: left;
+  flex-grow: 2;
+}
