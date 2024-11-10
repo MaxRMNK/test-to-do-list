@@ -1,0 +1,31 @@
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  .toggle,
+  .action {
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+}
+
+.task_name {
+  text-align: left;
+  flex-grow: 2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &.completed {
+    color: #a6a6a6;
+    text-decoration: line-through;
+    user-select: none;
+  }
+}
+
+.action {
+  display: inline-flex;
+  gap: 10px;
+}

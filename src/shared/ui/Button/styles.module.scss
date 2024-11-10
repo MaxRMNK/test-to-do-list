@@ -4,9 +4,6 @@
   align-items: center;
   vertical-align: middle;
   position: relative;
-  box-sizing: border-box;
-  outline: 0px;
-  margin: 0px;
   cursor: pointer;
   user-select: none;
   text-decoration: none;
@@ -15,11 +12,19 @@
   line-height: 1.75;
   text-transform: uppercase;
 
+  // outline: 0px;
+  // box-sizing: border-box;
+  margin: 0px;
   padding: 0px;
   border: 0px;
   border-radius: 4px;
   box-shadow: none;
-  transition: all 10ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 3ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  :focus {
+    // box-shadow: 5px 5px 5px #1976d2;
+    outline: 3px solid #333;
+  }
 }
 
 .default {
@@ -40,25 +45,51 @@
     cursor: default;
     color: #a6a6a6;
     background-color: #e0e0e0;
-    // color: rgba(0, 0, 0, 0.26);
-    // background-color: rgba(0, 0, 0, 0.12);
   }
 }
 
-.delete {
-  min-width: 20px;
-  width: 20px;
-  height: 20px;
-  padding: 4px;
+.button_icon {
+  min-width: 24px;
+  height: 24px;
   background-color: transparent;
-  background-image: url('./images/trash-2.svg');
+  // background-image: url('./images/trash-2.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 16px 16px;
   opacity: 0.5;
 
+  &.delete {
+    background-image: url('./images/trash-2.svg');
+  }
+
+  &.more {
+    background-image: url('./images/chevrons-right.svg');
+
+    // &.completed {
+    //   background-color: #1976d2;
+    // }
+  }
+
+  &.edit {
+    background-image: url('./images/edit-3.svg');
+  }
+
+  &.favorite {
+    background-image: url('./images/star.svg');
+  }
+
   &:hover {
-    // background-color: #a6a6a6;
-    opacity: 0.8;
+    opacity: 0.7;
+    background-color: #e0e0e0;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+
+  &:disabled {
+    cursor: default;
+    background-color: #e0e0e0;
+    opacity: 0.2;
   }
 }

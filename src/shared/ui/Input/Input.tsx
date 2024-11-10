@@ -3,35 +3,29 @@ import classes from './styles.module.scss';
 import { FC, InputHTMLAttributes } from 'react';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  variant?: 'search' | 'edit';
+  variant?: 'add' | 'edit';
   type: 'text';
-  // label?: string | null;
 }
 
 export const Input: FC<InputProps> = props => {
   const {
-    variant = 'search',
+    variant = 'add',
     type = 'text',
-    // label = null,
     children,
     disabled,
     className,
     ...otherProps
   } = props;
 
-  // label?.trim();
-
   return (
-    // <label>
-    //   <span>task name</span>
     <input
       className={clsx(className, classes.input, classes[variant])}
       disabled={disabled}
       placeholder="Add task"
+      // autoFocus={variant === 'add' ? true : false}
       {...otherProps}
     >
       {children}
     </input>
-    // </label>
   );
 };
