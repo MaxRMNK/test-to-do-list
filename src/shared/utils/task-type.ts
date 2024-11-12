@@ -7,6 +7,7 @@ export type Task = {
   id: number;
   name: string;
   completed: boolean;
+  description: string;
 };
 
 export type Tasks = Task[];

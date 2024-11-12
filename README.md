@@ -1,3 +1,12 @@
+# Можно улучшить:
+
+- Cделать настоящую валидацию для форм `FormAddTask` и `???`
+- Сделать возможность добавить Задачи в избранное
+- Добавить возможность сортировки Задач Drag’n’Drop
+- Добавить возможность создания нескольких To-Do листов
+- Добавить возможность делать вложенные Задачи или подпункты у Задач
+- ...
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -22,7 +31,7 @@ export default tseslint.config({
       tsconfigRootDir: import.meta.dirname,
     },
   },
-})
+});
 ```
 
 - Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
@@ -31,7 +40,7 @@ export default tseslint.config({
 
 ```js
 // eslint.config.js
-import react from 'eslint-plugin-react'
+import react from 'eslint-plugin-react';
 
 export default tseslint.config({
   // Set the react version
@@ -46,5 +55,5 @@ export default tseslint.config({
     ...react.configs.recommended.rules,
     ...react.configs['jsx-runtime'].rules,
   },
-})
+});
 ```

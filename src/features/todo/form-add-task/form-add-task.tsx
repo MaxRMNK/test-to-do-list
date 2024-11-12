@@ -4,22 +4,39 @@ import classes from './styles.module.scss';
 import { Input } from '../../../shared/ui/input/input';
 import { Button } from '../../../shared/ui/button/button';
 
-import { TaskName } from '../utils/task-type';
+import { TaskName } from '../../../shared/utils/task-type';
 
 interface FormAddTaskProps {
   taskName: TaskName;
-  addTask: (e: FormEvent<HTMLFormElement>, nameTask: TaskName) => void;
+  addTask: (nameTask: TaskName) => void;
   changeTask: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const FormAddTask: FC<FormAddTaskProps> = props => {
   const { taskName, addTask, changeTask } = props;
 
+  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (checkTaskName()) {
+      addTask(taskName);
+    }
+  };
+
+  // Примитивная "валидация":
+  // Проверка на наличие в строке чего-то кроме пробелов +
+  // ограничение минимальной и максимальной длины строки
+  const checkTaskName = () => {
+    return (
+      taskName.name.trim().length >= 5 && taskName.name.trim().length <= 250
+    );
+  };
+
   return (
     <form
       className={clsx(classes.form)}
       onSubmit={e => {
-        addTask(e, taskName);
+        submitForm(e);
       }}
     >
       <Input
@@ -35,8 +52,7 @@ export const FormAddTask: FC<FormAddTaskProps> = props => {
         type="submit"
         name="Add"
         children={'Add'}
-        disabled={taskName.name.trim() ? false : true}
-        // onClick={}
+        disabled={!checkTaskName()}
       />
     </form>
   );

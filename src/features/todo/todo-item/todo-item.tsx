@@ -2,18 +2,19 @@ import { FC, DetailedHTMLProps, HTMLAttributes } from 'react';
 import clsx from 'clsx';
 import classes from './styles.module.scss';
 import { Button } from '../../../shared/ui/button/button';
-import { Task } from '../utils/task-type';
+import { Task } from '../../../shared/utils/task-type';
 import { Checkbox } from '../../../shared/ui/checkbox/checkbox';
+import { Link } from 'react-router-dom';
 
 interface TodoItemProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
   task: Task;
-  removeTask: (id: number) => void;
+  deleteTask: (id: number) => void;
   completeTask: (id: number) => void;
 }
 
 export const TodoItem: FC<TodoItemProps> = props => {
-  const { task, removeTask, completeTask, className } = props;
+  const { task, deleteTask, completeTask, className } = props;
 
   return (
     <div className={clsx(className, classes.task)}>
@@ -22,7 +23,7 @@ export const TodoItem: FC<TodoItemProps> = props => {
           completeTask(task.id);
         }}
         checked={task.completed}
-        className={clsx(classes.toggle)}
+        className={clsx(classes.state)}
       />
 
       <div
@@ -30,10 +31,12 @@ export const TodoItem: FC<TodoItemProps> = props => {
           [classes.completed]: task.completed,
         })}
       >
-        {task.name} - {task.completed ? 'true' : 'false'}
+        <Link to={`/task/${task.id}`} className={clsx(classes.task_link)}>
+          {task.name} - {task.completed ? 'true' : 'false'}
+        </Link>
       </div>
-      <div className={clsx(classes.action)}>
-        {/* <Button variant="edit" name="edit" /> */}
+
+      {/* <div className={clsx(classes.action)}>
         <Button
           variant="delete"
           name="delete"
@@ -41,9 +44,10 @@ export const TodoItem: FC<TodoItemProps> = props => {
             removeTask(task.id);
           }}
         />
-        {/* <Button variant="favorite" name="favorite" /> */}
-        {/* <Button variant="more" name="more" /> */}
-      </div>
+      </div> */}
+      {/* <Button variant="edit" name="edit" /> */}
+      {/* <Button variant="favorite" name="favorite" /> */}
+      {/* <Button variant="more" name="more" /> */}
     </div>
   );
 };

@@ -1,12 +1,18 @@
 [
-  { "id": 1, "name": "task 1", "completed": false },
-  { "id": 2, "name": "task 2", "completed": false },
-  { "id": 3, "name": "task 3", "completed": true },
-  { "id": 4, "name": "task 4", "completed": false },
-  { "id": 5, "name": "task 5", "completed": false },
+  {
+    "id": 1,
+    "name": "task 1",
+    "completed": false,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin tortor purus platea sit eu id nisi litora libero. Neque vulputate consequat ac amet augue blandit maximus aliquet congue. Pharetra vestibulum posuere ornare faucibus fusce dictumst orci aenean eu facilisis ut volutpat commodo senectus purus himenaeos fames primis convallis nisi."
+  },
+  { "id": 2, "name": "task 2", "completed": false, "description": "" },
+  { "id": 3, "name": "task 3", "completed": true, "description": "" },
+  { "id": 4, "name": "task 4", "completed": false, "description": "" },
+  { "id": 5, "name": "task 5", "completed": false, "description": "" },
   {
     "id": 6,
-    "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "completed": false
+    "name": "Task 6: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "completed": false,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin tortor purus platea sit eu id nisi litora libero. Neque vulputate consequat ac amet augue blandit maximus aliquet congue. Pharetra vestibulum posuere ornare faucibus fusce dictumst orci aenean eu facilisis ut volutpat commodo senectus purus himenaeos fames primis convallis nisi."
   }
 ]
