@@ -1,4 +1,4 @@
-import { FC, FormEvent, ChangeEvent } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import classes from './styles.module.scss';
 import { Input } from '../../../shared/ui/input/input';
@@ -6,30 +6,37 @@ import { Button } from '../../../shared/ui/button/button';
 
 import { TaskName } from '../../../shared/utils/task-type';
 
+const TODO_DEFAULT = { name: '', description: '' };
+
 interface FormAddTaskProps {
-  taskName: TaskName;
-  addTask: (nameTask: TaskName) => void;
-  changeTask: (e: ChangeEvent<HTMLInputElement>) => void;
+  addTask: (task: TaskName) => void;
 }
 
-export const FormAddTask: FC<FormAddTaskProps> = props => {
-  const { taskName, addTask, changeTask } = props;
+export const FormAddTask: React.FC<FormAddTaskProps> = props => {
+  const { addTask } = props;
 
+  const [todo, setTodo] = useState<TaskName>(TODO_DEFAULT);
+
+  // ---
+  // Обновление состояния при вводе/редактировании Таски
+  const changeTask = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setTodo({ ...todo, [name]: value });
+  };
+
+  // ---
+  const checkTaskName = () => {
+    return todo.name.trim().length >= 5 && todo.name.trim().length <= 250;
+  };
+
+  // ---
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (checkTaskName()) {
-      addTask(taskName);
+      addTask(todo);
+      setTodo(TODO_DEFAULT);
     }
-  };
-
-  // Примитивная "валидация":
-  // Проверка на наличие в строке чего-то кроме пробелов +
-  // ограничение минимальной и максимальной длины строки
-  const checkTaskName = () => {
-    return (
-      taskName.name.trim().length >= 5 && taskName.name.trim().length <= 250
-    );
   };
 
   return (
@@ -43,7 +50,7 @@ export const FormAddTask: FC<FormAddTaskProps> = props => {
         variant="add"
         type="text"
         name="name"
-        value={taskName.name}
+        value={todo.name}
         onChange={changeTask}
         className={clsx(classes.input)}
       />

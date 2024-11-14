@@ -1,48 +1,47 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  TextareaHTMLAttributes,
+  ChangeEvent,
+} from 'react';
+import clsx from 'clsx';
+import classes from './styles.module.scss';
 
-const AutoResizeTextarea: React.FC = () => {
-  const [value, setValue] = useState<string>('');
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  variant?: 'big' | 'medium' | 'big_frame' | 'medium_frame';
+  value: string;
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+}
 
-  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(event.target.value);
-  };
+export const Textarea: React.FC<TextareaProps> = props => {
+  const { variant = 'big', value, onChange, className, ...otherProps } = props;
 
-  // Функция для автоматической подстройки высоты текстового поля
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Подстройка высоты текстового поля
   const adjustHeight = () => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto'; // Сбрасываем высоту
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Устанавливаем новую высоту
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight + 2}px`;
     }
   };
 
   useEffect(() => {
     adjustHeight();
-  }, [value]); // Вызываем при изменении значения
+  }, [value]);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-      }}
-    >
-      <textarea
-        ref={textareaRef}
-        value={value}
-        onChange={handleChange}
-        style={{
-          width: '100%',
-          minHeight: '40px',
-          resize: 'none', // Запрет изменения размера пользователем
-          overflow: 'hidden', // Скрываем полосу прокрутки
-          transition: 'all 0.2s ease', // Плавный переход при изменении высоты
-        }}
-        placeholder="Введите текст..."
-      />
-    </div>
+    <textarea
+      ref={textareaRef}
+      value={value}
+      onChange={onChange}
+      className={clsx(className, classes.textarea, classes[variant])}
+      // placeholder="Введите текст..."
+      rows={1}
+      spellCheck="false"
+      wrap="soft"
+      autoComplete="off"
+      {...otherProps}
+    />
   );
 };
-
-export default AutoResizeTextarea;

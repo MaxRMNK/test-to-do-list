@@ -1,68 +1,60 @@
-import { FC, DetailedHTMLProps, HTMLAttributes } from 'react';
+import React, { DetailedHTMLProps, HTMLAttributes, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import classes from './styles.module.scss';
+import { Task, Tasks } from '../../../shared/utils/task-type';
 
-import { Tasks } from '../../../shared/utils/task-type';
-import { Button } from '../../../shared/ui/button/button';
+// import { Button } from '../../../shared/ui/button/button';
 import { Checkbox } from '../../../shared/ui/checkbox/checkbox';
 import { PageNotFound } from '../../../shared/not-found/not-found';
-import { NavigationMenu } from '../../../widgets/navigation-menu/navigation-menu';
+import { FormEditTask } from '../form-edit-task/form-edit-task';
+import { TaskNavigation } from '../task-navigation/task-navigation';
 
 interface TaskPageProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
   taskList: Tasks;
-  deleteTask: (id: number) => void;
-  completeTask: (id: number) => void;
+  deleteTask: (id: Task['id']) => void;
+  completeTask: (id: Task['id']) => void;
+  editTask: ({ id, name, description }: Omit<Task, 'completed'>) => void;
 }
 
-export const TaskPage: FC<TaskPageProps> = props => {
-  const { taskList, deleteTask, completeTask } = props;
+export const TaskPage: React.FC<TaskPageProps> = props => {
+  const { taskList, deleteTask, completeTask, editTask } = props;
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handlerDeleteTask = () => {
-    deleteTask(task.id);
-    navigate('/', { replace: true });
-  };
-
-  const handlerEditTask = () => {
-    navigate('edit');
-  };
+  const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const { taskId } = useParams();
-
   const task = taskList.filter(item => item.id == Number(taskId))[0];
-
-  // console.log('thisTask', task);
 
   if (!task) {
     return <PageNotFound />;
   }
 
+  // const goHome = () => {
+  //   navigate('/', { replace: true });
+  // };
+
+  // const handlerDeleteTask = () => {
+  //   deleteTask(task.id);
+  //   navigate('/', { replace: true });
+  // };
+
+  const togleEditTask = () => {
+    setIsEdit(prev => !prev);
+  };
+
   return (
     <>
-      <div className={clsx(classes.nav)}>
-        <NavigationMenu />
+      <TaskNavigation
+        isEdit={isEdit}
+        togleEditTask={togleEditTask}
+        // handlerDeleteTask={handlerDeleteTask}
+        deleteTask={deleteTask}
+        taskId={task.id}
+      />
 
-        <div className={clsx(classes.action)}>
-          {/* <Button variant="favorite" name="favorite" /> */}
-          <Button
-            variant="edit"
-            name="edit"
-            onClick={() => {
-              handlerEditTask();
-            }}
-          />
-          <Button
-            variant="delete"
-            name="delete"
-            onClick={() => {
-              handlerDeleteTask();
-            }}
-          />
-        </div>
-      </div>
       <section className={clsx(classes.task)}>
         <Checkbox
           onChange={() => {
@@ -72,18 +64,30 @@ export const TaskPage: FC<TaskPageProps> = props => {
           className={clsx(classes.toggle)}
         />
 
-        <div className={clsx(classes.task_wrapper)}>
-          <div
-            className={clsx(classes.task_name, {
-              [classes.completed]: task.completed,
-            })}
-          >
-            {task.name} - {task.completed ? 'true' : 'false'}
+        {isEdit ? (
+          // Правка
+          <div className={clsx(classes.task_wrapper)}>
+            <FormEditTask
+              taskList={taskList}
+              editTask={editTask}
+              togleEditTask={togleEditTask}
+            />
           </div>
-          <div className={clsx(classes.task_description)}>
-            {task.description}
+        ) : (
+          // Просмотр
+          <div className={clsx(classes.task_wrapper)}>
+            <div
+              className={clsx(classes.task_name, {
+                [classes.completed]: task.completed,
+              })}
+            >
+              {task.name}
+            </div>
+            <div className={clsx(classes.task_description)}>
+              {task.description}
+            </div>
           </div>
-        </div>
+        )}
       </section>
     </>
   );

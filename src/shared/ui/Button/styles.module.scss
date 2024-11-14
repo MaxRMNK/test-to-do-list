@@ -74,6 +74,10 @@
     background-image: url('./images/edit-3.svg');
   }
 
+  &.save {
+    background-image: url('./images/save.svg');
+  }
+
   &.favorite {
     background-image: url('./images/star.svg');
   }

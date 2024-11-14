@@ -1,84 +1,114 @@
 import React, { useState } from 'react';
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import clsx from 'clsx';
 import classes from './styles.module.scss';
 
-import { TaskName, Tasks } from '../shared/utils/task-type';
+import { TaskName, Task, Tasks } from '../shared/utils/task-type';
 import TODO_LIST_DB from '../shared/assets/defaultTodoList.json';
 
 import { Header } from '../widgets/header/header';
 import { FormAddTask } from '../features/todo/form-add-task/form-add-task';
 import { TodoList } from '../features/todo/todo-list/todo-list';
 import { TaskPage } from '../features/task/task-page/task-page';
+
 import { PageNotFound } from '../shared/not-found/not-found';
-import { EditTaskPage } from '../features/task/edit-task/edit-task';
+// import { EditTaskPage } from '../features/task/form-edit-task/edit-task';
 
-const TODO_DEFAULT = { name: '', description: '' }; // { name: '' }
-
-// const TODO_LIST_DB: Tasks = [
-//   { id: 1, name: 'task 1', completed: false },
-//   { id: 2, name: 'task 2', completed: false },
-//   { id: 3, name: 'task 3', completed: true },
-//   { id: 4, name: 'task 4', completed: false },
-//   { id: 5, name: 'task 5', completed: false },
-// ];
-// const [count, setCount] = useState(0);
-// const [loading, setLoading] = useState<boolean>(true);
-// const [error, setError] = useState<boolean>(false);
+// const TODO_DEFAULT = { name: '', description: '' };
 
 const App = () => {
-  const [newTask, setNewTask] = useState<TaskName>(TODO_DEFAULT);
+  // const [newTask, setNewTask] = useState<TaskName>(TODO_DEFAULT);
   const [taskList, setTaskList] = useState<Tasks>(TODO_LIST_DB);
-  // const [count, setCount] = useState(0);
+
+  // const [todo, setTodo] = useState<TaskName>(TODO_DEFAULT);
+  // const [taskForEdit, setTaskForEdit] = useState<Task['id'] | null>(null);
 
   // ---
   // Отправка формы "Добавить Таск"
-  const addTask = (nameTask: TaskName) => {
-    // const idTask =
-    //   taskList.length > 0 ? taskList[taskList.length - 1].id + 1 : 0;
-
-    // const clearName = nameTask.name.trim();
-
+  const addTask = (task: TaskName) => {
     setTaskList([
       ...taskList,
       {
         id: taskList.length > 0 ? taskList[taskList.length - 1].id + 1 : 0,
-        name: nameTask.name.trim(),
+        name: task.name.trim(),
+        description: task.description.trim(), // пока, при создании приходит пустая строка - ''
         completed: false,
-        description: '',
       },
     ]);
-
-    setNewTask(TODO_DEFAULT);
   };
+
+  // const selectTaskForEdit = (id: Task['id']) => {
+  //   setTaskForEdit(id);
+  // };
 
   // ---
-  // Обновление состояния при вводе/редактировании Таски
-  const changeTask = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setNewTask({ ...newTask, [name]: value });
+  // Отправка формы "Редактировать Таск"
+  const editTask = ({ id, name, description }: Omit<Task, 'completed'>) => {
+    // console.log('name', name);
+    // console.log('description', description);
+
+    setTaskList(
+      taskList.map(task => {
+        if (task.id === id) {
+          return {
+            ...task,
+            name: name.trim(),
+            description: description.trim(),
+          };
+        }
+        return task;
+      }),
+    );
+    // setTaskForEdit(null);
   };
 
-  //
-  const deleteTask = (id: number) => {
+  // // ---
+  // // Обновление состояния при вводе/редактировании Таски
+  // const changeTask = (
+  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  // ) => {
+  //   console.log(e);
+
+  //   const { name, value } = e.target;
+  //   // setNewTask({ ...newTask, [name]: value });
+  //   setTodo({ ...todo, [name]: value });
+  // };
+
+  // ---
+  // Удалить Задачу
+  const deleteTask = (id: Task['id']) => {
     // const updateTaskList = taskList.filter(task => task.id !== id);
     // setTaskList(updateTaskList);
 
     setTaskList(prevTasks => [...prevTasks.filter(task => task.id !== id)]);
   };
 
-  //
-  const completeTask = (id: number) => {
-    // const updateTaskList = taskList.map(task =>
-    //   task.id !== id ? task : { ...task, completed: !task.completed },
-    // );
-    // setTaskList(updateTaskList);
-
-    setTaskList(prevTasks => [
-      ...prevTasks.map(task =>
-        task.id !== id ? task : { ...task, completed: !task.completed },
+  // ---
+  // Поставить/убрать метку "Задача выполнена"
+  const completeTask = (id: Task['id']) => {
+    // Коротко
+    setTaskList(
+      taskList.map(task =>
+        task.id === id ? { ...task, completed: !task.completed } : task,
       ),
-    ]);
+    );
+
+    // Развернуто
+    // setTaskList(
+    //   taskList.map(task => {
+    //     if (task.id === id) {
+    //       return { ...task, completed: !task.completed };
+    //     }
+    //     return task;
+    //   }),
+    // );
+
+    // Избыточно
+    // setTaskList(prevTasks => [
+    //   ...prevTasks.map(task =>
+    //     task.id !== id ? task : { ...task, completed: !task.completed },
+    //   ),
+    // ]);
   };
 
   return (
@@ -91,16 +121,11 @@ const App = () => {
             index
             element={
               <>
-                <FormAddTask
-                  addTask={addTask}
-                  taskName={newTask}
-                  changeTask={changeTask}
-                />
+                <FormAddTask addTask={addTask} />
 
                 <TodoList
                   className={clsx(classes.task_list)}
                   taskList={taskList}
-                  deleteTask={deleteTask}
                   completeTask={completeTask}
                 />
               </>
@@ -110,22 +135,29 @@ const App = () => {
             path="/task/:taskId" // task? - необязательный сегмент
             element={
               <TaskPage
+                taskList={taskList}
                 deleteTask={deleteTask}
                 completeTask={completeTask}
-                taskList={taskList}
+                editTask={editTask}
+
+                // selectTaskForEdit={selectTaskForEdit}
               />
             }
           />
-          <Route
-            path="/task/:taskId/edit" // task? - необязательный сегмент
+          {/* <Route
+            path="/task/:taskId/edit"
             element={
               <EditTaskPage
-                deleteTask={deleteTask}
-                completeTask={completeTask}
+                // editTask={editTask}
+                // todo={todo}
+                // changeTask={changeTask}
+                // deleteTask={deleteTask}
+                // completeTask={completeTask}
                 taskList={taskList}
+                editTask={editTask}
               />
             }
-          />
+          /> */}
 
           <Route path="/*" element={<PageNotFound />} />
         </Routes>

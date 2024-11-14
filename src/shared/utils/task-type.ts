@@ -1,13 +1,13 @@
-// export type TaskName = string;
 export type TaskName = {
   name: string;
+  description: string;
 };
 
 export type Task = {
   id: number;
-  name: string;
+  name: TaskName['name'];
+  description: TaskName['description'];
   completed: boolean;
-  description: string;
 };
 
 export type Tasks = Task[];

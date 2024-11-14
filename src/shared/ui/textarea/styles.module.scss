@@ -1,0 +1,45 @@
+.textarea {
+  font-size: 16px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  cursor: text;
+  border: none;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 0 4px 0;
+  outline: none;
+  width: 100%;
+  min-height: 20px;
+  resize: none;
+
+  &.big {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.23);
+  }
+
+  &.medium {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.75;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.23);
+  }
+
+  &.big_frame {
+    padding: 8px 14px;
+    border-radius: 4px;
+    border: 2px solid rgba(0, 0, 0, 0.23);
+  }
+
+  &.medium_frame {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.75;
+    padding: 8px 14px;
+    border-radius: 4px;
+    border: 2px solid rgba(0, 0, 0, 0.23);
+  }
+
+  &:focus {
+    color: #1f1f1f;
+    border-color: rgba(33, 126, 231, 0.8);
+  }
+}

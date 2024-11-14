@@ -1,16 +1,3 @@
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 100px;
-  margin: 0 0 20px 0;
-
-  .action {
-    display: inline-flex;
-    gap: 20px;
-  }
-}
-
 .task {
   display: flex;
   align-items: flex-start;
