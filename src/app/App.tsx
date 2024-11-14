@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import clsx from 'clsx';
 import classes from './styles.module.scss';
@@ -12,16 +12,11 @@ import { TodoList } from '../features/todo/todo-list/todo-list';
 import { TaskPage } from '../features/task/task-page/task-page';
 
 import { PageNotFound } from '../shared/not-found/not-found';
-// import { EditTaskPage } from '../features/task/form-edit-task/edit-task';
 
 // const TODO_DEFAULT = { name: '', description: '' };
 
 const App = () => {
-  // const [newTask, setNewTask] = useState<TaskName>(TODO_DEFAULT);
   const [taskList, setTaskList] = useState<Tasks>(TODO_LIST_DB);
-
-  // const [todo, setTodo] = useState<TaskName>(TODO_DEFAULT);
-  // const [taskForEdit, setTaskForEdit] = useState<Task['id'] | null>(null);
 
   // ---
   // Отправка формы "Добавить Таск"
@@ -36,10 +31,6 @@ const App = () => {
       },
     ]);
   };
-
-  // const selectTaskForEdit = (id: Task['id']) => {
-  //   setTaskForEdit(id);
-  // };
 
   // ---
   // Отправка формы "Редактировать Таск"
@@ -59,7 +50,6 @@ const App = () => {
         return task;
       }),
     );
-    // setTaskForEdit(null);
   };
 
   // // ---
@@ -139,25 +129,9 @@ const App = () => {
                 deleteTask={deleteTask}
                 completeTask={completeTask}
                 editTask={editTask}
-
-                // selectTaskForEdit={selectTaskForEdit}
               />
             }
           />
-          {/* <Route
-            path="/task/:taskId/edit"
-            element={
-              <EditTaskPage
-                // editTask={editTask}
-                // todo={todo}
-                // changeTask={changeTask}
-                // deleteTask={deleteTask}
-                // completeTask={completeTask}
-                taskList={taskList}
-                editTask={editTask}
-              />
-            }
-          /> */}
 
           <Route path="/*" element={<PageNotFound />} />
         </Routes>

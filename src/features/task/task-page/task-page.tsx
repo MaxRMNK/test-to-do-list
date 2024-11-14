@@ -1,10 +1,9 @@
 import React, { DetailedHTMLProps, HTMLAttributes, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import clsx from 'clsx';
 import classes from './styles.module.scss';
 import { Task, Tasks } from '../../../shared/utils/task-type';
 
-// import { Button } from '../../../shared/ui/button/button';
 import { Checkbox } from '../../../shared/ui/checkbox/checkbox';
 import { PageNotFound } from '../../../shared/not-found/not-found';
 import { FormEditTask } from '../form-edit-task/form-edit-task';
@@ -21,8 +20,6 @@ interface TaskPageProps
 export const TaskPage: React.FC<TaskPageProps> = props => {
   const { taskList, deleteTask, completeTask, editTask } = props;
 
-  // const navigate = useNavigate();
-
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const { taskId } = useParams();
@@ -31,15 +28,6 @@ export const TaskPage: React.FC<TaskPageProps> = props => {
   if (!task) {
     return <PageNotFound />;
   }
-
-  // const goHome = () => {
-  //   navigate('/', { replace: true });
-  // };
-
-  // const handlerDeleteTask = () => {
-  //   deleteTask(task.id);
-  //   navigate('/', { replace: true });
-  // };
 
   const togleEditTask = () => {
     setIsEdit(prev => !prev);
@@ -50,7 +38,6 @@ export const TaskPage: React.FC<TaskPageProps> = props => {
       <TaskNavigation
         isEdit={isEdit}
         togleEditTask={togleEditTask}
-        // handlerDeleteTask={handlerDeleteTask}
         deleteTask={deleteTask}
         taskId={task.id}
       />

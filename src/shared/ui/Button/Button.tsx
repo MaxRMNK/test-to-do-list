@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import classes from './styles.module.scss';
-import React, { ButtonHTMLAttributes, ComponentPropsWithRef } from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 
 // Чтобы попробовать как работает
 const unionOptions = [
@@ -19,7 +19,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onclick?: () => void;
 }
 
-// interface ButtonProps extends ComponentPropsWithRef<'button'> {
+// interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
 //   variant?: 'default' | 'nav' | 'delete' | 'more' | 'edit' | 'favorite';
 //   onclick?: () => void;
 // }
