@@ -8,6 +8,7 @@ const unionOptions = [
   'nav',
   'delete',
   'more',
+  'back',
   'edit',
   'save',
   'favorite',
@@ -46,6 +47,7 @@ export const Button: React.FC<ButtonProps> = props => {
             variant === 'edit' ||
             variant === 'save' ||
             variant === 'more' ||
+            variant === 'back' ||
             variant === 'favorite',
         },
         classes[variant],

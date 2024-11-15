@@ -7,29 +7,44 @@ import { TaskName, Task, Tasks } from '../shared/utils/task-type';
 import TODO_LIST_DB from '../shared/assets/defaultTodoList.json';
 
 import { Header } from '../widgets/header/header';
-import { FormAddTask } from '../features/todo/form-add-task/form-add-task';
+// import { FormAddTask } from '../features/todo/form-add-task/form-add-task';
 import { TodoList } from '../features/todo/todo-list/todo-list';
 import { TaskPage } from '../features/task/task-page/task-page';
 
 import { PageNotFound } from '../shared/not-found/not-found';
+import { Footer } from '../widgets/footer/footer';
 
 // const TODO_DEFAULT = { name: '', description: '' };
 
 const App = () => {
-  const [taskList, setTaskList] = useState<Tasks>(TODO_LIST_DB);
+  // const sortedList = TODO_LIST_DB.sort((a, b) => b.id - a.id);
+
+  const [taskList, setTaskList] = useState<Tasks>(
+    TODO_LIST_DB.sort((a, b) => b.id - a.id),
+  );
 
   // ---
   // Отправка формы "Добавить Таск"
   const addTask = (task: TaskName) => {
+    // Находим максимальный id в текущем массиве
+    const maxId =
+      taskList.length > 0 ? Math.max(...taskList.map(item => item.id)) : 0;
+
+    // Вариант сбоит если добавлять элементы в начало списка, или если id будут не по порядку
+    // const maxId = taskList.length > 0 ? taskList[taskList.length - 1].id + 1 : 0;
+
     setTaskList([
-      ...taskList,
       {
-        id: taskList.length > 0 ? taskList[taskList.length - 1].id + 1 : 0,
+        id: maxId + 1,
         name: task.name.trim(),
         description: task.description.trim(), // пока, при создании приходит пустая строка - ''
         completed: false,
       },
+      ...taskList,
     ]);
+
+    // Нормализует количество отображаемых элементов
+    // setVisibleTasksCount(prev => prev + 1);
   };
 
   // ---
@@ -110,15 +125,13 @@ const App = () => {
             // path="/"
             index
             element={
-              <>
-                <FormAddTask addTask={addTask} />
-
-                <TodoList
-                  className={clsx(classes.task_list)}
-                  taskList={taskList}
-                  completeTask={completeTask}
-                />
-              </>
+              <TodoList
+                addTask={addTask}
+                className={clsx(classes.task_list)}
+                taskList={taskList}
+                completeTask={completeTask}
+                removeTask={deleteTask}
+              />
             }
           />
           <Route
@@ -136,6 +149,7 @@ const App = () => {
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 };

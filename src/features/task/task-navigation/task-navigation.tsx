@@ -29,9 +29,16 @@ export const TaskNavigation: React.FC<TaskNavigationProps> = props => {
 
   return (
     <div className={clsx(classes.nav)}>
-      <Button className={clsx(classes.button_back)} onclick={goHome}>
+      <Button
+        variant="back"
+        name="back"
+        onclick={goHome}
+        className={clsx(classes.button_back)}
+        children={'назад'}
+      />
+      {/* <Button className={clsx(classes.button_back)} onclick={goHome}>
         Назад
-      </Button>
+      </Button> */}
 
       <div className={clsx(classes.action)}>
         <Button

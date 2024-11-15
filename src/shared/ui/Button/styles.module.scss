@@ -70,6 +70,10 @@
     // }
   }
 
+  &.back {
+    background-image: url('./images/chevrons-left.svg');
+  }
+
   &.edit {
     background-image: url('./images/edit-3.svg');
   }

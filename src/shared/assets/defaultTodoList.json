@@ -1,18 +1,122 @@
 [
   {
     "id": 1,
-    "name": "task 1",
-    "completed": false,
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin tortor purus platea sit eu id nisi litora libero. Neque vulputate consequat ac amet augue blandit maximus aliquet congue. Pharetra vestibulum posuere ornare faucibus fusce dictumst orci aenean eu facilisis ut volutpat commodo senectus purus himenaeos fames primis convallis nisi."
+    "name": "Проверить электронную почту",
+    "description": "Просмотреть новые сообщения и ответить на важные.",
+    "completed": true
   },
-  { "id": 2, "name": "task 2", "completed": false, "description": "" },
-  { "id": 3, "name": "task 3", "completed": true, "description": "" },
-  { "id": 4, "name": "task 4", "completed": false, "description": "" },
-  { "id": 5, "name": "task 5", "completed": false, "description": "" },
+  {
+    "id": 2,
+    "name": "Составить отчет по проекту",
+    "description": "Подготовить отчет о текущем состоянии проекта для руководства.",
+    "completed": true
+  },
+  {
+    "id": 3,
+    "name": "Созвониться и назначить встречу с клиентом для решения вопросов по проекту",
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
+    "completed": false
+  },
+  {
+    "id": 4,
+    "name": "Обновить информацию на сайте",
+    "description": "Добавить новые продукты и изменить цены на существующие.",
+    "completed": true
+  },
+  {
+    "id": 5,
+    "name": "Запланировать собрание",
+    "description": "Назначить встречу с командой на следующую неделю для обсуждения результатов работы за предыдущий квартал.",
+    "completed": false
+  },
   {
     "id": 6,
-    "name": "Task 6: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "completed": false,
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin tortor purus platea sit eu id nisi litora libero. Neque vulputate consequat ac amet augue blandit maximus aliquet congue. Pharetra vestibulum posuere ornare faucibus fusce dictumst orci aenean eu facilisis ut volutpat commodo senectus purus himenaeos fames primis convallis nisi."
+    "name": "Изучить новую версию языка программирования",
+    "description": "Посмотреть видеоуроки и прочитать документацию по нововведениям.",
+    "completed": true
+  },
+  {
+    "id": 7,
+    "name": "Подготовить презентацию для конференции",
+    "description": "Создать слайды и отрепетировать выступление.",
+    "completed": false
+  },
+  {
+    "id": 8,
+    "name": "Провести анализ конкурентов",
+    "description": "Собрать данные о сильных и слабых сторонах конкурентов на рынке.",
+    "completed": true
+  },
+  {
+    "id": 9,
+    "name": "Обсудить новый проект с командой",
+    "description": "",
+    "completed": false
+  },
+  {
+    "id": 10,
+    "name": "Настроить сервер для тестирования",
+    "description": "Убедиться, что все службы работают корректно и готовы к нагрузке.",
+    "completed": true
+  },
+  {
+    "id": 11,
+    "name": "Написать статью для корпоративного блога",
+    "description": "Поделиться опытом внедрения новых технологий в работу.",
+    "completed": false
+  },
+  {
+    "id": 12,
+    "name": "Проверка документации по проекту",
+    "description": "",
+    "completed": true
+  },
+  {
+    "id": 13,
+    "name": "Организовать корпоративный выезд на природу",
+    "description": "Запланировать мероприятия и выбрать место для отдыха.",
+    "completed": false
+  },
+  {
+    "id": 14,
+    "name": "Обновить профиль в социальных сетях",
+    "description": "",
+    "completed": true
+  },
+  {
+    "id": 15,
+    "name": "Участие в вебинаре по маркетингу",
+    "description": "Послушать экспертов в области маркетинга",
+    "completed": false
+  },
+  {
+    "id": 16,
+    "name": "Разработать новый функционал приложения",
+    "description": "",
+    "completed": true
+  },
+  {
+    "id": 17,
+    "name": "Сделать уборку в офисе",
+    "description": "",
+    "completed": false
+  },
+  {
+    "id": 18,
+    "name": "Проверить финансовые отчеты за квартал",
+    "description": "",
+    "completed": true
+  },
+  {
+    "id": 19,
+    "name": "Установить обновления программного обеспечения",
+    "description": "",
+    "completed": false
+  },
+  {
+    "id": 20,
+    "name": "Обсудить идеи для нового продукта",
+    "description": "",
+    "completed": true
   }
 ]

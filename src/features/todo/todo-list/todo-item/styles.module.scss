@@ -13,28 +13,37 @@
   .task_name {
     text-align: left;
     flex-grow: 2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
 
-    &.completed .task_link {
+    &.completed {
       color: #a6a6a6;
       text-decoration: line-through;
       user-select: none;
     }
 
-    .task_link {
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
+    // &.completed .task_link{
+    //       color: #a6a6a6;
+    //       text-decoration: line-through;
+    //       user-select: none;
+    // }
 
-      display: block;
+    // .task_link {
+    //   text-overflow: ellipsis;
+    //   white-space: nowrap;
+    //   overflow: hidden;
 
-      // &:hover {
-      //   color: #515151;
-      // }
-    }
+    //   display: block;
+
+    //   // &:hover {
+    //   //   color: #515151;
+    //   // }
+    // }
   }
 
-  &:hover {
-    background-color: #fcfcfc;
+  .action {
+    display: inline-flex;
+    gap: 10px;
   }
 }

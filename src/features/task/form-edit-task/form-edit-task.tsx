@@ -26,12 +26,14 @@ export const FormEditTask: React.FC<FormEditTaskProps> = props => {
     return <PageNotFound />;
   }
 
-  const [todo, setTodo] = useState<Task>({
-    id: task.id,
-    name: task.name,
-    description: task.description,
-    completed: task.completed,
-  });
+  const [todo, setTodo] = useState<Task>(task);
+
+  // const [todo, setTodo] = useState<Task>({
+  //   id: task.id,
+  //   name: task.name,
+  //   description: task.description,
+  //   completed: task.completed,
+  // });
 
   // ---
   // Обновление состояния при вводе/редактировании Таски.
@@ -40,20 +42,25 @@ export const FormEditTask: React.FC<FormEditTaskProps> = props => {
     setTodo({ ...todo, [name]: value });
   };
 
-  const submitForm = (e: React.FormEvent) => {
-    e.preventDefault();
-    editTask(todo);
-    togleEditTask();
-  };
-
   // ---
   // Проверка содержимого полей. Вместо этого надо сделать нормальную валидацию.
-  // const checkTaskName = () => {
-  //   return todo.name.trim().length >= 5 && todo.name.trim().length <= 250;
-  // };
-  // const checkTaskDescription = () => {
-  //   return todo.name.trim().length >= 5 && todo.name.trim().length <= 250;
-  // };
+  const checkTaskName = () => {
+    return (
+      todo.name.trim().length >= 5 &&
+      todo.name.trim().length <= 250 &&
+      todo.description.trim().length <= 1000
+    );
+  };
+
+  const submitForm = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (checkTaskName()) {
+      editTask(todo);
+      setTodo(task);
+      togleEditTask();
+    }
+  };
 
   return (
     <form
@@ -96,7 +103,7 @@ export const FormEditTask: React.FC<FormEditTaskProps> = props => {
           type="submit"
           name="submit"
           children={'Сохранить'}
-          // disabled={!checkTaskName()}
+          disabled={!checkTaskName()}
         />
       </div>
     </form>

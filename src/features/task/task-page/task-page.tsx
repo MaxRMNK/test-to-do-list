@@ -70,9 +70,11 @@ export const TaskPage: React.FC<TaskPageProps> = props => {
             >
               {task.name}
             </div>
-            <div className={clsx(classes.task_description)}>
-              {task.description}
-            </div>
+            {task.description.trim() !== '' && (
+              <div className={clsx(classes.task_description)}>
+                {task.description}
+              </div>
+            )}
           </div>
         )}
       </section>
