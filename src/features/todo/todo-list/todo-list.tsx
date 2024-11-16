@@ -15,7 +15,13 @@ interface TodoListProps
 }
 
 export const TodoList: FC<TodoListProps> = props => {
-  const { addTask, taskList, completeTask, removeTask, className } = props;
+  const {
+    addTask,
+    taskList,
+    completeTask,
+    // removeTask,
+    className,
+  } = props;
 
   return (
     <>
@@ -27,7 +33,7 @@ export const TodoList: FC<TodoListProps> = props => {
             <TodoItem
               task={item}
               completeTask={completeTask}
-              removeTask={removeTask}
+              // removeTask={removeTask}
               className={clsx(classes.task_item)}
             />
           </li>

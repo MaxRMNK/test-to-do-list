@@ -1,5 +1,5 @@
 import { FC, DetailedHTMLProps, HTMLAttributes } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import classes from './styles.module.scss';
 
@@ -11,11 +11,16 @@ interface TodoItemProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
   task: Task;
   completeTask: (id: Task['id']) => void;
-  removeTask: (id: Task['id']) => void;
+  // removeTask: (id: Task['id']) => void;
 }
 
 export const TodoItem: FC<TodoItemProps> = props => {
-  const { task, completeTask, removeTask, className } = props;
+  const {
+    task,
+    completeTask,
+    // removeTask,
+    className,
+  } = props;
 
   const navigate = useNavigate();
 
