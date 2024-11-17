@@ -1,0 +1,23 @@
+.page_wrapper {
+  // min-height: calc(100vh - 40px);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.page {
+  padding: 30px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  flex-grow: 2;
+}
+
+.main_container {
+  display: flex;
+  flex-direction: column;
+}

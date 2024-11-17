@@ -8,14 +8,19 @@ interface FooterProps {}
 export const Footer: FC<FooterProps> = props => {
   const {} = props;
 
-  // var currentYear = new Date().getFullYear();
+  const currentYear: number = new Date().getFullYear();
+
+  const viewDate = (startYear: number) => {
+    if (!currentYear || startYear >= currentYear) return startYear;
+    return `${startYear}-${currentYear}`;
+  };
 
   return (
     <footer className={clsx(classes.footer)}>
       <p>
-        © 2024,{' '}
+        © {viewDate(2024)} |{' '}
         <Link to={'https://github.com/MaxRMNK'} target="_blank">
-          Max RMNK
+          MaxRMNK
         </Link>
       </p>
     </footer>
